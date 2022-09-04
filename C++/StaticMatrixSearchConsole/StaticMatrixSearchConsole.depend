@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1580416635 source:d:\programs\staticmatrixsearchconsole\main.cpp
+	<cstring>
+	<iostream>
+

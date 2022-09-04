@@ -1,0 +1,3 @@
+This bot was designed for a class competition to be used in the at-robots DOS program that can be found here -> http://necrobones.com/atrobots/ 
+
+He is incomplete, and I may come back and finish him sometime...

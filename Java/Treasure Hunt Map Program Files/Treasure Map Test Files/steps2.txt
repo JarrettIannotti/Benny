@@ -1,0 +1,5 @@
+north 2
+west 3
+north 5
+east 8
+south 2

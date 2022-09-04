@@ -1,0 +1,4 @@
+north 5
+east 3
+jump 2
+south 7

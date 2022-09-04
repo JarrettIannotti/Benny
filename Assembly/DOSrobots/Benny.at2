@@ -1,0 +1,114 @@
+#msg jiannotti
+
+#def SCANARC
+#def ENEMYDETECTED
+#def ENEMYBEARING
+#def ACCURACY
+#def HEAT
+mov SCANARC, 5
+
+!main
+
+
+    mov ENEMYDETECTED, 5000
+    opo p_throttle, 100
+	int I_LOCATE
+
+del 5
+
+    cmp ex, 850
+    jgr !steerleft
+
+    cmp ex, 150
+    jls !steerright
+
+    cmp fx, 850
+    jgr !steerup
+
+    cmp fx, 150
+    jls !steerdown
+
+    ipo p_random, ax
+	AND ax, 31
+	SUB ax, 15 ;
+	opo p_steering, ax
+
+
+   opo P_TROTATE, 15 ;FLAG
+
+
+
+    ipo P_SCAN, ENEMYDETECTED
+    opo P_ARC, SCANARC
+    ipo P_ACCURACY, ACCURACY
+    err ACCURACY
+
+    ipo p_spedometer, ax
+    cmp ax, 0
+    jeq !main
+
+    Cmp ENEMYDETECTED, 10       ;TOO CLOSE
+    jle !main
+
+
+    Cmp ENEMYDETECTED, 1000     ;ENEMY
+    jle !CODERED
+    jmp !main
+
+
+
+
+!steerleft
+    mov ax, 190
+    jmp !setbearing
+
+
+!steerright
+    mov ax, 64
+    jmp !setbearing
+
+
+!steerup
+    mov ax, 0
+    jmp !setbearing
+
+!steerdown
+    mov ax, 128
+    jmp !setbearing
+
+
+!setbearing
+        ipo p_compass, bx
+        sub ax, bx
+        opo p_steering, ax
+        jmp !main
+
+
+
+
+
+!CODERED
+opo P_TROTATE, 0
+
+ipo P_TURRET_OFS, ax
+opo p_steering, ax
+
+opo P_TAIM
+del 5
+opo P_WEAPON
+del 5
+opo P_WEAPON
+jmp !heatcheck
+
+
+
+!heatcheck
+ipo P_HEAT, HEAT
+cmp HEAT, 250
+JAE !main
+JLS !CODERED
+
+
+
+
+
